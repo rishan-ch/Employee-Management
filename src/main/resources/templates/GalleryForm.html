@@ -22,7 +22,7 @@
 
 				<span th:each="imgName : ${imgNameList}">
 
-					<img th:src="@{'/images/'+${imgName}}" width="300" height="300">
+					<a th:href="@{'/images/'+${imgName}}" target="blank"><img class="p-2" th:src="@{'/images/'+${imgName}}" width="200" height="200"></a>
 
 				</span>
 
