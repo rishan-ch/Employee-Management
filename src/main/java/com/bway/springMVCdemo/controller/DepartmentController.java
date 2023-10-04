@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bway.springMVCdemo.model.Department;
 import com.bway.springMVCdemo.service.DepartmentService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class DepartmentController {
 	
@@ -19,7 +21,10 @@ public class DepartmentController {
 	private DepartmentService deptService;
 
 	@GetMapping("/department")
-	public String getDeptForm() {
+	public String getDeptForm(HttpSession session) {
+		if(session.getAttribute("validUser")==null) {
+			return "Login";
+		}
 		return "DepartmentForm";
 	}
 	

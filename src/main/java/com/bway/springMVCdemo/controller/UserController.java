@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.bway.springMVCdemo.model.User;
 import com.bway.springMVCdemo.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 	
@@ -22,9 +24,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String postLogin(@ModelAttribute User user, Model model) {
+	public String postLogin(@ModelAttribute User user, Model model, HttpSession session) {
 		
 		User usr = userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+		
+		
+		session.setAttribute("validUser", usr);
+		session.setMaxInactiveInterval(200);//logout after inactivity
+		
 		
 		if(usr!=null) {
 			return "Home";

@@ -13,6 +13,8 @@ import com.bway.springMVCdemo.model.Employee;
 import com.bway.springMVCdemo.service.DepartmentService;
 import com.bway.springMVCdemo.service.EmployeeService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class EmployeeController {
 	
@@ -23,7 +25,10 @@ public class EmployeeController {
 	private DepartmentService deptService; 
 	
 	@GetMapping("/employee")
-	public String getEmpForm(Model model) {
+	public String getEmpForm(Model model, HttpSession session) {
+		if(session.getAttribute("validUser")==null) {
+			return "Login";
+		}
 		model.addAttribute("deptList",deptService.getAllDept());
 		return "EmployeeForm";
 	}

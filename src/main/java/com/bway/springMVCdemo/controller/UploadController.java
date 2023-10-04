@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UploadController {
 	
@@ -22,7 +24,11 @@ public class UploadController {
 	}
 
 	@PostMapping("/upload")
-	public String postUpload(@RequestParam MultipartFile image, Model model) {
+	public String postUpload(@RequestParam MultipartFile image, Model model, HttpSession session) {
+		
+		if(session.getAttribute("validUser")==null) {
+			return "Login";
+		}
 		
 		if(!image.isEmpty()) {
 			try {
