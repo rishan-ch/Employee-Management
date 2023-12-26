@@ -1,5 +1,7 @@
 package com.bway.springMVCdemo.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,14 @@ import com.bway.springMVCdemo.model.User;
 import com.bway.springMVCdemo.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.java.Log;
 
+@Log
 @Controller
 public class UserController {
+	
+	//creating object for logger
+	//private static final Logger logger = LoggerFactory.getLogger(UserController.class) ;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -34,9 +41,11 @@ public class UserController {
 		
 		
 		if(usr!=null) {
+			log.info("--------------Login success------------");
 			return "Home";
 		}
 		
+		log.info("--------------Login failed------------");
 		model.addAttribute("error","user not found");
 		return "Login";
 	}
@@ -52,6 +61,19 @@ public class UserController {
 		userRepo.save(user);
 		
 		return "Login";
+	}
+	
+	@PostMapping("/logout")
+	public String logout(HttpSession session) {
+		//unbinds any object related to this session after invalidate
+		session.invalidate();
+		log.info("--------------User logout------------");
+		return "Login";
+	}
+	
+	@GetMapping("/profile")
+	public String profile() {
+		return "Profile";
 	}
 
 }

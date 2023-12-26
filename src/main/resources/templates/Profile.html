@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>User profile</title>
+</head>
+
+<body>
+
+	<th:block th:insert="header.html"></th:block>
+	<div class="container-fluid">
+
+		<div class="card">
+			<div class="card-header text-center bg-primary text-white">
+				<h5>User info</h5>
+			</div>
+
+
+			<div class="card-body">
+
+
+				<div class="row p-2">
+
+					<div class="col-4">First name</div>
+					<div class="col-6">
+						[[${session.validUser.fname}]]
+					</div>
+				</div>
+				
+				<div class="row p-2">
+
+					<div class="col-4">Last name</div>
+					<div class="col-6">
+						[[${session.validUser.lname}]]
+					</div>
+				</div>
+				<div class="row p-2">
+
+					<div class="col-4">Email</div>
+					<div class="col-6">
+						[[${session.validUser.email}]]
+					</div>
+				</div>
+				
+				<div class="row p-2">
+
+					<div class="col-4">Username</div>
+					<div class="col-6">
+						[[${session.validUser.username}]]
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="card-footer text-center bg-warning ">copyright@2023</div>
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>
